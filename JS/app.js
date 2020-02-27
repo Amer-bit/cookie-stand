@@ -1,7 +1,7 @@
 'use strict'
 
 var hours = ['6AM', '7AM', '8AM', '9AM', '10AM', '11AM', '12PM', '1PM', '2PM', '3PM', '4PM', '5PM', '6PM', '7PM'];
-var storeLocation = [seattle, tokyo, dubai, paris, lima]
+var storeLocation = []
 
 function Shop(name, minCust, maxCust, avgCookiePerCust) {
     this.name = name
@@ -11,6 +11,8 @@ function Shop(name, minCust, maxCust, avgCookiePerCust) {
     this.amountOfCookiesPerHour = [];
     this.noOfCustomorPerHour = 0;
     this.totalCookies = 0;
+    storeLocation.push(this);  //push the whole object in storeLocation asa an array of objects 
+    //it like doing  [seattle,tokyo,etc..]
 }
 
 
@@ -41,13 +43,11 @@ Shop.prototype.sumOfTheCookies = function () {
 document.getElementById('sec1');
 var articleData = document.createElement('article');
 sec1.appendChild(articleData);
+var storesTable = document.createElement('table');
 
+articleData.appendChild(storesTable);
 
-Shop.prototype.header = function () {
-
-    var storesTable = document.createElement('table');
-
-    articleData.appendChild(storesTable);
+function header() {
 
 
     var tableRow = document.createElement('tr');
@@ -55,34 +55,68 @@ Shop.prototype.header = function () {
     var tableColumn = document.createElement('th');
     tableRow.appendChild(tableColumn);
     tableColumn.textContent = 'Location';
-    for (var columns = 0; columns < 16; columns++) {
+    for (var columns = 0; columns < hours.length; columns++) {
         tableColumn = document.createElement('th');
         tableRow.appendChild(tableColumn);
         tableColumn.textContent = hours[columns];
 
     }
-
     tableColumn.textContent = ('Daily Location Total')
+
 }
 
-Shop.prototype.finalToushes = function(){
+Shop.prototype.finalTouches = function () {
+    var cookiesRow = document.createElement('tr');
+    storesTable.appendChild(cookiesRow)
+    var cookiescolumn = document.createElement('td')
+    cookiesRow.appendChild(cookiescolumn)
+    cookiescolumn.textContent = this.name
+    for (var rowLength = 0; rowLength < hours.length; rowLength++) {
+        var cookiescolumn = document.createElement('td')
+        cookiesRow.appendChild(cookiescolumn)
+        cookiescolumn.textContent = this.amountOfCookiesPerHour[rowLength]  //pay attention to your property
 
-var storesTable = document.createElement('table');  
-sec1.appendChild(storesTable);
-var tableRow = document.createElement('tr');
-    storesTable.appendChild(tableRow);
-//for(var r=0; r<5; r++){
+
+    }
+    //  var cookiescolumn = document.createElement('td')   WHY???
+    // cookiesRow.appendChild(cookiescolumn)
+    cookiescolumn.textContent = this.totalCookies
+    // console.log(rowLength);
+    // console.log(counter2);
+
+
+}
+
+
+// console.log(hours.length);
+
+var totalOfTotals = function () {
+
+    var totalRow = document.createElement('tr');
+    storesTable.appendChild(totalRow);
+    var tableColumn = document.createElement('td')
+    totalRow.appendChild(tableColumn);
+    tableColumn.textContent = 'Total'
+    for (var hourlyCookieSum = 0; hourlyCookieSum < hours.length; hourlyCookieSum++) {
+        console.log('lllllllll',hours.length);
+        
+        var sumit = 0;
+        var tableColumn = document.createElement('td');
+        totalRow.appendChild(tableColumn);
+        
+        for (var i = 0; i < 5; i++) {
+
+            sumit += storeLocation[i].amountOfCookiesPerHour[hourlyCookieSum];
+            
+            console.log(sumit, `i =${i} , hours=${hourlyCookieSum}`);
+        }
+
+        tableColumn.textContent = sumit
     
-    for(var c=0; c<16; c++){
-    var tableColumn = document.createElement('td');
-    tableRow.appendChild(tableColumn);
-    tableColumn.textContent =  storeLocation[0];
-   
+        
+    }
+    
 }
-}
-//}
-
-
 
 
 
@@ -94,29 +128,42 @@ var dubai = new Shop('Dubai', 11, 38, 3.7);
 var paris = new Shop('Paris', 20, 38, 2.3);
 var lima = new Shop('Lima', 2, 16, 4.6);
 
-seattle.header();
-tokyo.calculateNofCookies();  //put it after var seattle
-tokyo.sumOfTheCookies();
-seattle.finalToushes();
 
-var storeLocation = [seattle, tokyo, dubai, paris, lima]
+
+
+
+
+
+
+
+
+
+
+
+header();
 
 for (var counter2 = 0; counter2 < storeLocation.length; counter2++) {
     storeLocation[counter2].calculateNofCookies();
     storeLocation[counter2].sumOfTheCookies();
+    storeLocation[counter2].finalTouches();
 }
+totalOfTotals();
 
 
 
-console.log(lima.amountOfCookiesPerHour);
+console.log(lima.amountOfCookiesPerHour);  //its more professional to comment consol.log() after finishing
 console.log(dubai.totalCookies);
 console.log(tokyo.name);
+console.log(storeLocation);
 
 
 
-function getRandomNumber(min, max) {
+
+
+
+
+
+
+function getRandomNumber(min, max) {                        //Helper function
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
-
-
-
