@@ -40,12 +40,15 @@ Shop.prototype.sumOfTheCookies = function () {
 }
 
 
+
 document.getElementById('sec1');
 var articleData = document.createElement('article');
 sec1.appendChild(articleData);
 var storesTable = document.createElement('table');
-
+storesTable.setAttribute("id","tab")
 articleData.appendChild(storesTable);
+
+
 
 function header() {
 
@@ -55,12 +58,13 @@ function header() {
     var tableColumn = document.createElement('th');
     tableRow.appendChild(tableColumn);
     tableColumn.textContent = 'Location';
-    for (var columns = 0; columns < hours.length; columns++) {
+    for (var columns = 0; columns <= hours.length; columns++) {
         tableColumn = document.createElement('th');
         tableRow.appendChild(tableColumn);
         tableColumn.textContent = hours[columns];
 
     }
+
     tableColumn.textContent = ('Daily Location Total')
 
 }
@@ -71,15 +75,13 @@ Shop.prototype.finalTouches = function () {
     var cookiescolumn = document.createElement('td')
     cookiesRow.appendChild(cookiescolumn)
     cookiescolumn.textContent = this.name
-    for (var rowLength = 0; rowLength < hours.length; rowLength++) {
+    for (var rowLength = 0; rowLength <= hours.length; rowLength++) {
         var cookiescolumn = document.createElement('td')
         cookiesRow.appendChild(cookiescolumn)
         cookiescolumn.textContent = this.amountOfCookiesPerHour[rowLength]  //pay attention to your property
-
-
     }
-    //  var cookiescolumn = document.createElement('td')   WHY???
-    // cookiesRow.appendChild(cookiescolumn)
+    // var cookiescolumn = document.createElement('td')  // WHY does it add another column???
+    // cokiesRow.appendChild(cookiescolumn)
     cookiescolumn.textContent = this.totalCookies
     // console.log(rowLength);
     // console.log(counter2);
@@ -89,6 +91,7 @@ Shop.prototype.finalTouches = function () {
 
 
 // console.log(hours.length);
+var everyShopTotal = 0;
 
 var totalOfTotals = function () {
 
@@ -98,24 +101,30 @@ var totalOfTotals = function () {
     totalRow.appendChild(tableColumn);
     tableColumn.textContent = 'Total'
     for (var hourlyCookieSum = 0; hourlyCookieSum < hours.length; hourlyCookieSum++) {
-        console.log('lllllllll',hours.length);
-        
+        console.log('lllllllll', hours.length);
+
+
         var sumit = 0;
         var tableColumn = document.createElement('td');
         totalRow.appendChild(tableColumn);
-        
+
         for (var i = 0; i < 5; i++) {
 
             sumit += storeLocation[i].amountOfCookiesPerHour[hourlyCookieSum];
-            
+
             console.log(sumit, `i =${i} , hours=${hourlyCookieSum}`);
         }
+        tableColumn.textContent = sumit;
+        everyShopTotal += sumit;
 
-        tableColumn.textContent = sumit
-    
-        
+        console.log('dsdsd  ', everyShopTotal);
+
     }
-    
+
+
+    var lastcell = document.createElement('td')
+    totalRow.appendChild(lastcell);
+    lastcell.textContent = everyShopTotal
 }
 
 
@@ -154,10 +163,10 @@ totalOfTotals();
 console.log(lima.amountOfCookiesPerHour);  //its more professional to comment consol.log() after finishing
 console.log(dubai.totalCookies);
 console.log(tokyo.name);
-console.log(storeLocation);
 
 
 
+console.log(tokyo.totalCookies);
 
 
 
@@ -167,3 +176,27 @@ console.log(storeLocation);
 function getRandomNumber(min, max) {                        //Helper function
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
+
+// name, minCust, maxCust, avgCookiePerCust
+
+var myForm = document.getElementById('cookieForm');
+myForm.addEventListener('submit', function (event) {
+    event.preventDefault();
+    var name = event.target.location.value;
+    console.log(name);
+
+    var minCust = event.target.minCust.value;
+    var maxCust = event.target.maxCust.value;
+    var avgCookiePerCust = event.target.avgCust.value;
+    var cookieObj = new Shop(name, minCust, maxCust, avgCookiePerCust)
+
+    cookieObj.calculateNofCookies();
+    cookieObj.sumOfTheCookies();
+    cookieObj.finalTouches();
+    
+    document.getElementById("tab").deleteRow(storeLocation.length);
+    console.log(storeLocation.length);
+    totalOfTotals();2.
+    
+    myForm.reset();
+})
