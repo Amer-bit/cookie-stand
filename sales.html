@@ -14,33 +14,32 @@
 
         <header id="header1"><h1>Sales Data</h1></header>
         
-        <section id="sec1">
-            <h2>Locations: <br></h2>
+        
+        <form action="" id="cookieForm">
 
-
-        </section>
-
-        <form action="">
-            <br>
-            <br>
-            <br>
             <fieldset>
                 <legend>Cookie Data</legend>
                 <label for="location">Add New Store Location: </label><br>
-                <input type="text" id="location" name="location" placeholder="Enter new City e.g.Munich" required> <br>
+                <input type="text"  maxlength="15" id="location" name="location" placeholder="Enter new City e.g.Munich" required> <br>
                 <label for="minCust">Minimum Custmor Per Hour: </label> <br>
-                <input type="text" id="minCust" name="minCust" placeholder="Enter a positive number" required><br>
+                <input type="number" min="0" id="minCust" name="minCust" step="any" placeholder="Enter a positive number" required><br>
                 <label for="maxCust">Max Custmor Per Hour:</label><br>
-                <input type="text" id="maxCust" name="maxCust" placeholder="Enter a positive number" required><br>        
+                <input type="number" min="0" id="maxCust" name="maxCust" step="any" placeholder="Enter a positive number" required><br>        
                 <label for="avgCust">Average Cookies Sold Per Custome:</label><br>
-                <input type="text" id="avgCust" name="avgCust" placeholder="Enter a positive number" required><br><br>
+                <input type="number" min="0" id="avgCust" name="avgCust" step="any" placeholder="Enter a positive number" required><br><br>
                 <button id="submit" i>Submit Here</button>
             </fieldset>
+            <br><br><br>
             
         </form>
-
+        
+        <section id="se c1">
+        <h2>Locations: <br></h2>
+        
+    
+        </section>
     </main>
-
+    
     <script src="JS/app.js"></script>
 
 </body>
