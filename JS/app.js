@@ -196,7 +196,7 @@ myForm.addEventListener('submit', function (event) {
     
     document.getElementById("tab").deleteRow(storeLocation.length);
     console.log(storeLocation.length);
-    totalOfTotals();2.
+    totalOfTotals();
     
     myForm.reset();
 })
