@@ -1,7 +1,13 @@
+.sale{
+  background-color: #EBE7E3;
+}
 
 body {
-    font-family: Arial, Helvetica, sans-serif;
+  position: relative;
+  margin :0;
+  font-family: Arial, Helvetica, sans-serif;
   }
+
 
   table, th, td {
     border: 2px solid black;
@@ -10,6 +16,7 @@ body {
   }
 
 .navbar {
+
     overflow: hidden;
     background-color: #333;
   }
@@ -67,4 +74,52 @@ body {
   
   .dropdown:hover .dropdown-content {
     display: block;
+  }
+
+
+
+  header{
+    background-color: #EBE7E3;
+  
+  }
+
+
+#heading{
+  font-family: 'Trade Winds';
+}
+h2{
+  font-family: 'Roboto Condensed'
+}
+h3{
+  font-family: 'Roboto Condensed'
+}
+
+
+
+p{
+  font-family: 'Spartan';
+  font-size: 1.2em;
+}
+
+footer{
+  position: relative;
+  background-color: #EBE7E3;
+  padding: 150px;
+}
+          footer p {
+            font-size: 1.1em;
+          }
+
+
+  footer img{
+    float: right;
+      
+  }
+  .comp{
+    float: right;
+    margin-right: 100px;
+  }
+  .salmon{
+    position: relative;
+    margin:0px 400px ;
   }
